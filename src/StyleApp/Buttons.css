@@ -1,0 +1,15 @@
+.btn {
+    background-color:blue;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+}
+.btn:hover{
+    background-color: red;
+    cursor: pointer;
+}
+.loadMore {
+    margin: 20px 0;
+}
