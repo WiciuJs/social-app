@@ -9,6 +9,11 @@ const AddPost = (props) => {
   const addPost = (e) => {
     e.preventDefault();
 
+if(!postContent){
+  return;
+}
+
+
     axios
       .post(
         "https://akademia108.pl/api/social-app/post/add",
@@ -17,7 +22,7 @@ const AddPost = (props) => {
         }
       )
       .then((res) => {
-        props.getPrevPosts();
+        props.getPrevPosts(); // odświżenie 
         setPostContent('');
       })
       .catch((error) => {
@@ -27,7 +32,9 @@ const AddPost = (props) => {
   
   return (
     <form onSubmit={addPost} className='addPostForm'>
-      <textarea placeholder="Add post..." onChange={(e)=>setPostContent(e.target.value)} value={postContent}></textarea>
+      <textarea placeholder="Add post..." 
+      onChange={(e)=>setPostContent(e.target.value)} 
+      value={postContent}></textarea>
       <button className="btn">Add</button>
     </form>
   );

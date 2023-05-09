@@ -34,31 +34,26 @@ const Home = (props) => {
             const getPrevPosts = () => {
                 axios
                   .post("https://akademia108.pl/api/social-app/post/newer-then", {
-                    date: posts.created_at,
+                    date: posts.created_at, // pobieramy obiek 0
                   })
                   .then((res) => {
                     let resData = res.data
-                    setPosts(resData.concat(posts))
+                    setPosts(resData.concat(posts)) // przekaznaie na początek i +stan
                   })
                   .catch((error) => {
                     console.error(error)
                   })
-              }
-            console.log(posts);
-              useEffect(() => {
-                getLatestPosts()
-              }, [])
-
-
+                }
 
 
 useEffect(() => {
     getLatestPosts()
-},[props.user]);
+},[props.user]); //
     
 
 return (
-    <div className="Home">
+    <div className="Home"> 
+      {props.user && <AddPost getPrevPosts={getPrevPosts}/>} 
         <div className="postList">{posts.map((post) =>{
         return <Post post={post} key={post.id} />
             })}

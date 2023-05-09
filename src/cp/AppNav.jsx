@@ -1,3 +1,5 @@
+import '../StyleApp/AppNav.css';
+
 import {Link} from "react-router-dom";
 import axios from 'axios';
 const AppNav = (props) => {
@@ -33,7 +35,7 @@ const handleLogout = (e) =>{
                     <Link to="/signup">SignUp</Link>
                 </li>}
 
-                {!props.user && <li>
+                {props.user && <li>
                     <Link to="/" onClick={handleLogout}>Logout</Link>
                 </li>}
 
