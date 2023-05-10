@@ -3,13 +3,13 @@ import { useState } from "react";
 import axios from "axios";
 
 const AddPost = (props) => {
-  const [postContent, setPostContent] = useState("");
+  const [postContent, setPostContent] = useState('');
 
 
   const addPost = (e) => {
     e.preventDefault();
 
-if(!postContent){
+ if(!postContent){ // czy to musi być ? skoro jest puste ?
   return;
 }
 
