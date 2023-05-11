@@ -9,9 +9,9 @@ const AddPost = (props) => {
   const addPost = (e) => {
     e.preventDefault();
 
- if(!postContent){ // czy to musi być ? skoro jest puste ?
-  return;
-}
+    if (!postContent) { // czy to musi być ? skoro jest puste ?
+      return;
+    }
 
 
     axios
@@ -29,12 +29,12 @@ const AddPost = (props) => {
         console.error(error);
       });
   };
-  
+
   return (
     <form onSubmit={addPost} className='addPostForm'>
-      <textarea placeholder="Add post..." 
-      onChange={(e)=>setPostContent(e.target.value)} 
-      value={postContent}></textarea>
+      <textarea placeholder="Add post..."
+        onChange={(e) => setPostContent(e.target.value)}
+        value={postContent}></textarea>
       <button className="btn">Add</button>
     </form>
   );

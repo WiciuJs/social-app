@@ -41,7 +41,7 @@ const Login = (props) => {
                     setLoginMassage ('Incorrect usernmame or password')
                 }else {
                     setLoginMassage('')
-                    props.setUser(res.date);
+                    props.setUser(res.data);
                     localStorage.setItem('user',JSON.stringify(res.data));
                 }
 
