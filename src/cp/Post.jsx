@@ -1,20 +1,26 @@
 import "../StyleApp/Post.css";
 import { useState } from "react";
 import axios from 'axios';
+import "../StyleApp/Buttons.css"
 
 const Post = (props) => {
 
     const [likesCount, setLikesCount] = useState(props.post.likes.length)
+    const [deltePostYes, delatePostNo] = useState(false)
 
 
 
     const delatePost = (id) => {
 
         axios
-            .post('http://akademia108.pl/api/social-app/user/delate', {
-                post_id: id // pobieram post id
-            })
+            .post("https://akademia108.pl/api/social-app/post/delete"
+                , {
+                    post_id: id // pobieram post po id
+                })
             .then((res) => {
+                props.setPosts((posts) => {
+                    return posts.filter(post => post.id !== res.data.post_id)
+                })
                 console.log(res)
             })
             .catch((error) => {
@@ -36,8 +42,16 @@ const Post = (props) => {
                 <div className="postContent">{props.post.content}</div>
 
                 <div className="likes">
-                    <button className="btn Delate" onClick={()=>delatePost(props.post.id)}>Delate</button>
-                    {likesCount}
+                    {props.user?.username === props.post.user.username && <button className="btn Delate" onClick={() => delatePostNo(true)}>Delate</button>
+                    }{likesCount}
+
+                    {deltePostYes && <div className="confirmDelete">
+                        <h2>Jesteś Pewien ?</h2>
+                        <button className="btn yes" onClick={() => delatePost(props.post.id)}>Tak</button>
+                        <button className="btn no" onClick={() => delatePostNo(false)}>Nie</button>
+                    </div>}
+
+
                 </div>
             </div>
 

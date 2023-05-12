@@ -13,3 +13,23 @@
 .loadMore {
     margin: 20px 0;
 }
+.confirmDelete {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    border:1px solid black;
+    top:50%;
+    left: 50%;
+    background-color: black;
+    color: white;
+    width: 300px;
+    text-align: center;
+    
+}
+
+.confirmDelete .yes:hover {
+    color: green;
+} 
+
+.confirmDelete .no:hover {
+    color: red;
+} 

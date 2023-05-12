@@ -21,7 +21,7 @@ const Home = (props) => {
 
   const getNextPosts = () => {
     axios
-      .post('http://akademia108.pl/api/social-app/post/older-then', {
+      .post('https://akademia108.pl/api/social-app/post/older-then', {
         date: posts[posts.length - 1].created_at
       })
       .then((res) => {
@@ -46,6 +46,8 @@ const Home = (props) => {
       })
   }
 
+  
+
 
   useEffect(() => {
     getLatestPosts()
@@ -56,7 +58,7 @@ const Home = (props) => {
     <div className="Home">
       {props.user && <AddPost getPrevPosts={getPrevPosts} />}
       <div className="postList">{posts.map((post) => {
-        return <Post post={post} key={post.id} />
+        return <Post post={post} key={post.id} user={props.user} setPosts={setPosts}/>
       })}
         <button className="btn loadMore" onClick={getNextPosts}>Load More</button>
       </div>
