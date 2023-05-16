@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Post from "../cp/Post";
 import AddPost from '../cp/AddPost';
+import '../cp/FollowRecommendstions.jsx'
 const Home = (props) => {
 
   const [posts, setPosts] = useState([]);
@@ -57,6 +58,7 @@ const Home = (props) => {
   return (
     <div className="Home">
       {props.user && <AddPost getPrevPosts={getPrevPosts} />}
+      {props.user && <FollowRecommendstions user={props.user} getLatestPosts={getLatestPosts} posts={posts} />}
       <div className="postList">{posts.map((post) => {
         return <Post post={post} key={post.id} user={props.user} setPosts={setPosts}/>
       })}

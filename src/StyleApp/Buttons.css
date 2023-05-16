@@ -33,3 +33,10 @@
 .confirmDelete .no:hover {
     color: red;
 } 
+
+.unfllow {
+    background-color: black;
+}
+.follow {
+    background-color: pink;
+}

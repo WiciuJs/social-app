@@ -7,6 +7,7 @@ const Post = (props) => {
 
     const [likesCount, setLikesCount] = useState(props.post.likes.length)
     const [deltePostYes, delatePostNo] = useState(false)
+    const [doesUserLiked, setDoesUserLiked] = useState(props.post.likes.filter(like => like.username === props.user?.username).length !== 0);
 
 
 
@@ -27,6 +28,30 @@ const Post = (props) => {
                 console.error(error)
             });
     };
+
+    const likePost = (id, isLiked) => {
+        axios.post("https://akademia108.pl/api/social-app/post/" + (isLiked ? 'dislike' : 'like'), {
+            post_id: id
+        })
+            .then(() => {
+                setLikesCount(likesCount + (isLiked ? -1 : 1));
+                setDoesUserLiked(!isLiked);
+            });
+    };
+
+
+    const unfollow = (id) => {
+        axios.post("https://akademia108.pl/api/social-app/follows/disfollow", {
+            leader_id: id,
+        })
+            .then(() => {
+                props.getLatestPosts();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <div className="post">
             <div className="avatar">
@@ -43,8 +68,24 @@ const Post = (props) => {
 
                 <div className="likes">
                     {props.user?.username === props.post.user.username && <button className="btn Delate" onClick={() => delatePostNo(true)}>Delate</button>
-                    }{likesCount}
-
+                    }
+                    {props.user && (
+                        <button
+                            className='btn'
+                            onClick={() => likePost(props.post.id, doesUserLiked)}
+                        >
+                            {doesUserLiked ? 'Dislike' : 'Like'}
+                        </button>
+                    )}
+                    {likesCount}
+                    {props.user && props.user.username !== props.post.user.username && (
+                        <button
+                            className='btn unfllow'
+                            onClick={() => unfollow(props.post.user.id)}
+                        >
+                            Unfollow
+                        </button>
+                    )}
                     {deltePostYes && <div className="confirmDelete">
                         <h2>Jesteś Pewien ?</h2>
                         <button className="btn yes" onClick={() => delatePost(props.post.id)}>Tak</button>
